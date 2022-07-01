@@ -1,4 +1,6 @@
 from transformers import T5Tokenizer, T5EncoderModel
+from transformers import T5ForConditionalGeneration
+
 import pickle
 import argparse
 import numpy as np
@@ -42,7 +44,9 @@ class T5XEmbeddingGenerator():
         self.projection = self.projection.to(self.device)
         self.tokenizer = T5Tokenizer.from_pretrained(f"google/t5-v1_1-{self.model_size}", cache_dir=cache_dir)
         model = T5EncoderModel.from_pretrained(f"google/t5-v1_1-{self.model_size}", cache_dir=cache_dir)
-        self.model, _, _, _, _ = T5EncoderModel._load_pretrained_model(model, state_dict_new, None, f"google/t5-v1_1-{self.model_size}")
+        # model = T5ForConditionalGeneration.from_pretrained(f"google/t5-v1_1-{self.model_size}", cache_dir=cache_dir)
+        # self.model, _, _, _, _ = T5EncoderModel._load_pretrained_model(model, state_dict_new, None, f"google/t5-v1_1-{self.model_size}")
+        self.model, _, _, _, _ = T5EncoderModel._load_pretrained_model(model, state_dict_new, [], None, f"google/t5-v1_1-{self.model_size}")
         self.model.to(self.device)
         self.model.eval()
 

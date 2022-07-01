@@ -27,7 +27,8 @@ mauve_output_key = "random_gen_mauve" if "random" in args.gen_key_type else "max
 
 
 if args.domain == "wiki":
-    with open("data/multi_outs/t5_xxl_descartes_wiki_ppl.jsonl", "r") as f:
+    # with open("data/multi_outs/t5_xxl_descartes_wiki_ppl.jsonl", "r") as f:
+    with open("outputs_beam/wiki_t5_xl_beam_2_tokens_20_samples_10.jsonl", "r") as f:
         raw_inp_data = [json.loads(x) for x in f.read().strip().split("\n")]
     for rid in raw_inp_data:
         assert rid["prefix"] in data_dict
